@@ -1,5 +1,12 @@
 let fs = require('fs')
 let input = fs.readFileSync('marathon.txt').toString().split(' ')
+let rank = input.map(Number)
+let runners = {}
+
+for(let i = 0; i < input.length; i ++) {
+    runners[i] = +input[i]
+}
+console.log(runners);
 
 function mergeSort(arr) {
     if(arr.length < 2) {
@@ -14,20 +21,20 @@ function mergeSort(arr) {
 
 function merge(a_l, a_r) {
     let result = []
-    let left_index = 0
-    let right_index = 0
-    while(left_index < a_l.length && right_index < a_r.length) {
-        console.log('yo',right_index);
-        if(a_l[left_index] <= a_r[right_index]) {
-            result.push(a_l[left_index])
-            left_index++
+    let l_index = 0
+    let r_index = 0
+
+    while(l_index < a_l.length && r_index < a_r.length) {
+        if(a_l[l_index] <= a_r[r_index]) {
+            result.push(a_l[l_index])
+            l_index++
         }
         else {
-            result.push(a_r[right_index])
-            right_index++
+            result.push(a_r[r_index])
+            r_index++
         }
     }   
-    return result.concat(a_l.slice(left_index), a_r.slice(right_index))
+    return result.concat(a_l.slice(l_index), a_r.slice(r_index))
 }
 
 console.log(mergeSort(input))
